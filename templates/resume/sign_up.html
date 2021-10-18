@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Resume Maker</title>
+    <link href="/static/css/style1.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="javascript_header"></div>
+    <form method="POST" name="myid">
+        {% csrf_token %}
+        <div class="form__header">
+            <h1>Sign Up</h1>
+            <p>Enter your login details below.</p>
+        </div>
+        <div class="form-group">
+            <label for="firstname">First Name<span> * </span></label>
+            <input id="firstname" class="formInput" name="firstname" type="text">
+            <div class="error" id="name__error"></div>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name<span> * </span></label>
+            <input id="lastname" class="formInput" name="lastname" type="text">
+            <div class="error" id="name__error"></div>
+        </div>
+        <div class="form-group"><label for="username">Username<span> * </span></label>
+            <input id="username" name="username" type="text" required="" />
+            <div class="error" id="name__error"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password<span> * </span></label>
+            <input id="password" name="password" type="password" required="" />
+        </div>
+        <div class="line-break"></div>
+        {% if id is None %}
+        <input id="register" onclick="myFunction()" id="submit" type="submit" value="Register" /> Already have an account? <a href="{% url 'sign_in' %}">Sign In</a> 
+        {% else %}
+        <input id="register"  onclick="myFunction()" id="submit" type="submit" value="Register" /> Already have an account? <a href="{% url 'sign_in' id %}">Sign In</a>
+         {% endif %}
+    </form>
+    <script src="/static/script.js"></script>
+</body>
+
+<script>
+   $('#submit').click(function(){
+   if($.trim($('#myMessage').val()) == ''){
+      alert('Input can not be left blank');
+   }
+});
+</script>
+
+</html>
+{% if status %}
+<script>
+    alert("{{status}}");
+    window.location = "/";
+</script>
+{% endif %}
